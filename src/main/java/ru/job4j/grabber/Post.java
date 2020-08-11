@@ -6,12 +6,14 @@ import java.util.Objects;
 public class Post {
     private int id;
     private String name;
+    private String text;
     private String url;
     private Calendar date;
 
-    public Post(int id, String name, String url, Calendar date) {
+    public Post(int id, String name, String text, String url, Calendar date) {
         this.id = id;
         this.name = name;
+        this.text = text;
         this.url = url;
         this.date = date;
     }
@@ -48,6 +50,14 @@ public class Post {
         this.date = date;
     }
 
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -57,7 +67,10 @@ public class Post {
             return false;
         }
         Post post = (Post) o;
-        return id == post.id && name.equals(post.name) && Objects.equals(url, post.url) && date.equals(post.date);
+        return id == post.id && name.equals(post.name)
+                && Objects.equals(text, post.text)
+                && Objects.equals(url, post.url)
+                && date.equals(post.date);
     }
 
     @Override
