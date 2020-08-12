@@ -1,20 +1,21 @@
-package ru.job4j.grabber;
+package ru.job4j.model;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 public class Post {
     private int id;
     private String name;
-    private String text;
     private String url;
-    private Calendar date;
+    private String text;
+    private Date date;
 
-    public Post(int id, String name, String text, String url, Calendar date) {
-        this.id = id;
+    public Post(String name, String url, String text, Date date) {
         this.name = name;
-        this.text = text;
         this.url = url;
+        this.text = text;
         this.date = date;
     }
 
@@ -42,11 +43,11 @@ public class Post {
         this.url = url;
     }
 
-    public Calendar getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -83,3 +84,4 @@ public class Post {
         return "id= " + id + ", name= " + name + ", url= " + url + ", date= " + date;
     }
 }
+
