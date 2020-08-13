@@ -9,5 +9,5 @@ import java.util.List;
 public interface Parse {
     List<Post> list(String link) throws ParseException, IOException;
 
-    Post detail(String link);
+    Post detail(String link) throws IOException, ParseException;
 }
