@@ -11,7 +11,6 @@ import java.util.*;
 
 public class SqlRuParse implements Parse {
     private final FormatMonth fm = new FormatMonth();
-    private Calendar date = fm.getDate();
 
     public static void main(String[] args) throws Exception {
         SqlRuParse sqlRuParse = new SqlRuParse();
@@ -22,7 +21,7 @@ public class SqlRuParse implements Parse {
     @Override
     public List<Post> list(String link) throws ParseException, IOException {
         List<Post> posts = new ArrayList<>();
-        for (int page = 1; page <= 5; page++) {
+        for (int page = 1; page <= 1; page++) {
             Document doc = Jsoup.connect(link + page).get();
             Elements row = doc.selectFirst(".forumTable").select(".postslisttopic");
             for (Element td : row) {
@@ -30,8 +29,7 @@ public class SqlRuParse implements Parse {
                 String url = href.attr("href");
                 String name = href.text();
                 String dateText = td.lastElementSibling().text();
-                date = fm.format(dateText);
-                posts.add(new Post(name, url, "", date.getTime()));
+                posts.add(new Post(name, url, "", fm.format(dateText)));
             }
         }
         return posts;
@@ -44,8 +42,6 @@ public class SqlRuParse implements Parse {
         String name = el.first().select(".messageHeader").text();
         String info = el.select(".msgBody").get(1).text();
         String dateText = el.first().select(".msgFooter").text().split("\\[")[0];
-        date = fm.format(dateText);
-        System.out.println(date.getTime());
-        return new Post(name, link, info, date.getTime());
+        return new Post(name, link, info, fm.format(dateText));
     }
 }

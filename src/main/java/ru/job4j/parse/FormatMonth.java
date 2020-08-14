@@ -4,13 +4,14 @@ import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class FormatMonth {
-    private Locale language = new Locale("ru");
-    private SimpleDateFormat dateFormatAll = new SimpleDateFormat("dd MMM yy, HH:mm", language);
-    private SimpleDateFormat todayAndYesterday = new SimpleDateFormat("dd MMM yy", language);
-    private final Calendar date = Calendar.getInstance();
+    private final Locale language = new Locale("ru");
+    private final SimpleDateFormat dateFormatAll = new SimpleDateFormat("dd MMM yy, HH:mm", language);
+    private final SimpleDateFormat todayAndYesterday = new SimpleDateFormat("dd MMM yy", language);
+
 
     public FormatMonth() {
         DateFormatSymbols instance = DateFormatSymbols.getInstance(language);
@@ -20,21 +21,19 @@ public class FormatMonth {
         todayAndYesterday.setDateFormatSymbols(instance);
     }
 
-    public Calendar getDate() {
-        return date;
-    }
-
-    public Calendar format(String dateText) throws ParseException {
+    public Date format(String dateText) throws ParseException {
+        Calendar date = Calendar.getInstance();
         if (dateText.contains("сегодня")) {
             String time = dateText.split(" ")[1];
-            date.setTime(todayAndYesterday.parse(todayAndYesterday.format(date.getTime()) + ", " + time));
+            String s = todayAndYesterday.format(date.getTime()) + ", " + time;
+            return dateFormatAll.parse(s);
         } else if (dateText.contains("вчера")) {
             String time = dateText.split(" ")[1];
             date.add(Calendar.DATE, -1);
-            date.setTime(todayAndYesterday.parse(todayAndYesterday.format(date.getTime()) + ", " + time));
+            String s = todayAndYesterday.format(date.getTime()) + ", " + time;
+            return dateFormatAll.parse(s);
         } else {
-            date.setTime(dateFormatAll.parse(dateText));
+            return dateFormatAll.parse(dateText);
         }
-        return date;
     }
 }
