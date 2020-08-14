@@ -12,12 +12,6 @@ import java.util.*;
 public class SqlRuParse implements Parse {
     private final FormatMonth fm = new FormatMonth();
 
-    public static void main(String[] args) throws Exception {
-        SqlRuParse sqlRuParse = new SqlRuParse();
-        sqlRuParse.list("https://www.sql.ru/forum/job-offers/");
-        sqlRuParse.detail("https://www.sql.ru/forum/485068/soobshheniya-ot-moderatorov-zdes-vy-mozhete-uznat-prichiny-udaleniya-topikov");
-    }
-
     @Override
     public List<Post> list(String link) throws ParseException, IOException {
         List<Post> posts = new ArrayList<>();

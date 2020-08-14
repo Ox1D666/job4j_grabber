@@ -6,13 +6,13 @@ import java.util.Objects;
 public class Post {
     private int id;
     private String name;
-    private String url;
+    private String link;
     private String text;
     private Date date;
 
-    public Post(String name, String url, String text, Date date) {
+    public Post(String name, String link, String text, Date date) {
         this.name = name;
-        this.url = url;
+        this.link = link;
         this.text = text;
         this.date = date;
     }
@@ -33,12 +33,12 @@ public class Post {
         this.name = name;
     }
 
-    public String getUrl() {
-        return url;
+    public String getLink() {
+        return link;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setLink(String link) {
+        this.link = link;
     }
 
     public Date getDate() {
@@ -68,18 +68,18 @@ public class Post {
         Post post = (Post) o;
         return id == post.id && name.equals(post.name)
                 && Objects.equals(text, post.text)
-                && Objects.equals(url, post.url)
+                && Objects.equals(link, post.link)
                 && date.equals(post.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(url);
+        return Objects.hash(link);
     }
 
     @Override
     public String toString() {
-        return "id= " + id + ", name= " + name + ", url= " + url + ", date= " + date;
+        return "id= " + id + ", name= " + name + ", url= " + link + ", date= " + date;
     }
 }
 
