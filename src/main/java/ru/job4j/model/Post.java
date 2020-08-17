@@ -1,6 +1,6 @@
 package ru.job4j.model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Post {
@@ -8,9 +8,9 @@ public class Post {
     private String name;
     private String link;
     private String text;
-    private Date date;
+    private Timestamp date;
 
-    public Post(String name, String link, String text, Date date) {
+    public Post(String name, String link, String text, Timestamp date) {
         this.name = name;
         this.link = link;
         this.text = text;
@@ -41,11 +41,11 @@ public class Post {
         this.link = link;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 

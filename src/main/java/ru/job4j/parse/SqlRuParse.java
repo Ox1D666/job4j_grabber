@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import ru.job4j.model.Post;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.*;
 
@@ -23,7 +24,7 @@ public class SqlRuParse implements Parse {
                 String url = href.attr("href");
                 String name = href.text();
                 String dateText = td.lastElementSibling().text();
-                posts.add(new Post(name, url, "", fm.format(dateText)));
+                posts.add(new Post(name, url, "", (Timestamp) fm.format(dateText)));
             }
         }
         return posts;
@@ -36,6 +37,6 @@ public class SqlRuParse implements Parse {
         String name = el.first().select(".messageHeader").text();
         String info = el.select(".msgBody").get(1).text();
         String dateText = el.first().select(".msgFooter").text().split("\\[")[0];
-        return new Post(name, link, info, fm.format(dateText));
+        return new Post(name, link, info, (Timestamp) fm.format(dateText));
     }
 }
