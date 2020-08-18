@@ -24,9 +24,10 @@ public class SqlRuParse implements Parse {
                 String url = href.attr("href");
                 String name = href.text();
                 String dateText = td.lastElementSibling().text();
-                posts.add(new Post(name, url, "", (Timestamp) fm.format(dateText)));
+                posts.add(new Post(name, url, "", new Timestamp(fm.format(dateText).getTime())));
             }
         }
+        posts.forEach(System.out::println);
         return posts;
     }
 
@@ -37,6 +38,6 @@ public class SqlRuParse implements Parse {
         String name = el.first().select(".messageHeader").text();
         String info = el.select(".msgBody").get(1).text();
         String dateText = el.first().select(".msgFooter").text().split("\\[")[0];
-        return new Post(name, link, info, (Timestamp) fm.format(dateText));
+        return new Post(name, link, info, new Timestamp(fm.format(dateText).getTime()));
     }
 }

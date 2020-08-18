@@ -3,8 +3,6 @@ package ru.job4j.store;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.job4j.model.Post;
-
-import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
@@ -42,6 +40,7 @@ public class PsqlStore implements Store, AutoCloseable {
             try (ResultSet keys = ps.getGeneratedKeys()) {
                 if (keys.next()) {
                     post.setId(keys.getInt(1));
+                    LOG.debug("save - success, post id = " + post.getId());
                 }
             }
         } catch (SQLException e) {
@@ -92,8 +91,14 @@ public class PsqlStore implements Store, AutoCloseable {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         PsqlStore ps = new PsqlStore();
-        ps.save(new Post("qwe", "asd", "???", new Timestamp(1431324123)));
+        ps.save(new Post("qwe", "???", "???", new Timestamp(1597206720000L)));
+
+        Post post = ps.findById("1");
+        System.out.println(post.toString());
+
+        List<Post> posts = ps.getAll();
+        posts.forEach(System.out::println);
     }
 }

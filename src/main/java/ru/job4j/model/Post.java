@@ -79,7 +79,7 @@ public class Post {
 
     @Override
     public String toString() {
-        return "id= " + id + ", name= " + name + ", url= " + link + ", date= " + date;
+        return "id= " + id + ", name= " + name + ", link= " + link + ", date= " + date;
     }
 }
 
