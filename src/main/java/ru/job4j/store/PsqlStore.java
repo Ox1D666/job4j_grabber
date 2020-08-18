@@ -13,10 +13,8 @@ public class PsqlStore implements Store, AutoCloseable {
     private static final Logger LOG = LoggerFactory.getLogger(PsqlStore.class.getName());
     private Connection cnn;
 
-    public PsqlStore() {
-        try (InputStream in = PsqlStore.class.getClassLoader().getResourceAsStream("rabbit.properties")) {
-            Properties cfg = new Properties();
-            cfg.load(in);
+    public PsqlStore(Properties cfg) {
+        try {
             Class.forName(cfg.getProperty("jdbc.driver"));
             cnn = DriverManager.getConnection(
                     cfg.getProperty("jdbc.url"),
@@ -89,16 +87,5 @@ public class PsqlStore implements Store, AutoCloseable {
         if (cnn != null) {
             cnn.close();
         }
-    }
-
-    public static void main(String[] args) throws Exception {
-        PsqlStore ps = new PsqlStore();
-        ps.save(new Post("qwe", "???", "???", new Timestamp(1597206720000L)));
-
-        Post post = ps.findById("1");
-        System.out.println(post.toString());
-
-        List<Post> posts = ps.getAll();
-        posts.forEach(System.out::println);
     }
 }
