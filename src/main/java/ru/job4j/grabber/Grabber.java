@@ -1,6 +1,5 @@
 package ru.job4j.grabber;
 
-
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
@@ -64,7 +63,7 @@ public class Grabber implements Grab {
         public void execute(JobExecutionContext context) throws JobExecutionException {
             JobDataMap map = context.getJobDetail().getJobDataMap();
             Store store = (Store) map.get("store");
-            Parse parse = (Parse) map.get("store");
+            Parse parse = (Parse) map.get("parse");
             try {
                 List<Post> postList = parse.list("https://www.sql.ru/forum/job-offers/");
                 postList.forEach(store::save);

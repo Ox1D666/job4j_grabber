@@ -7,7 +7,7 @@ import java.text.ParseException;
 import java.util.List;
 
 public interface Parse {
-    List<Post> list(String link) throws ParseException, IOException;
+    List<Post> list(String link) throws Exception;
 
     Post detail(String link) throws IOException, ParseException;
 }

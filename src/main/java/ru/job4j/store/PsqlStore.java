@@ -88,4 +88,19 @@ public class PsqlStore implements Store, AutoCloseable {
             cnn.close();
         }
     }
+
+    @Override
+    public Timestamp getDateLastPost() throws SQLException {
+        Timestamp date = null;
+        try (PreparedStatement ps = cnn.prepareStatement("select * from post order by created desc limit 1")) {
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    date = rs.getTimestamp("created");
+                }
+            } catch (Exception e) {
+                LOG.error(e.getMessage(), e);
+            }
+        }
+        return date;
+    }
 }
