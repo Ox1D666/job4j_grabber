@@ -11,7 +11,6 @@ import ru.job4j.store.PsqlStore;
 import ru.job4j.store.Store;
 
 import java.io.*;
-import java.text.ParseException;
 import java.util.List;
 import java.util.Properties;
 
@@ -65,7 +64,7 @@ public class Grabber implements Grab {
             Store store = (Store) map.get("store");
             Parse parse = (Parse) map.get("parse");
             try {
-                List<Post> postList = parse.list("https://www.sql.ru/forum/job-offers/");
+                List<Post> postList = parse.list("https://www.sql.ru/forum/job-offers/", store.getDateLastPost());
                 postList.forEach(store::save);
             } catch (Exception e) {
                 LOG.debug(e.getMessage(), e);
