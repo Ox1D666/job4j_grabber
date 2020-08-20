@@ -20,16 +20,25 @@ public class SqlRuParse implements Parse {
         for (int page = 1; page <= 1; page++) {
             Document doc = Jsoup.connect(link + page).get();
             Elements row = doc.selectFirst(".forumTable").select(".postslisttopic");
-            for (int i = 3; i < row.size(); i++) {
-                Element href = row.get(i).child(0);
-                String url = href.attr("href");
-                String name = href.text();
-                String dateText = row.get(i).lastElementSibling().text();
-                Timestamp elDate = new Timestamp(fm.format(dateText).getTime());
-                if (lastDate.getTime() < elDate.getTime()) {
-                    posts.add(new Post(name, url, "", elDate));
-                } else {
-                    break;
+            if (lastDate.equals(null)) {
+                for (int i = 3; i < row.size(); i++) {
+                    Element href = row.get(i).child(0);
+                    String url = href.attr("href");
+                    String name = href.text();
+                    String dateText = row.get(i).lastElementSibling().text();
+                    System.out.println("ok");
+                    posts.add(new Post(name, url, "", new Timestamp(fm.format(dateText).getTime())));
+                }
+            } else {
+                for (Element td : row) {
+                    Element href = td.child(0);
+                    String url = href.attr("href");
+                    String name = href.text();
+                    String dateText = td.lastElementSibling().text();
+                    Timestamp elDate = new Timestamp(fm.format(dateText).getTime());
+                    if (lastDate.getTime() < elDate.getTime()) {
+                        posts.add(new Post(name, url, "", elDate));
+                    }
                 }
             }
         }
