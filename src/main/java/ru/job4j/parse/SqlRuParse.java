@@ -38,10 +38,10 @@ public class SqlRuParse implements Parse {
                         String name = href.text();
                         String dateText = row.get(i).lastElementSibling().text();
                         Timestamp elDate = new Timestamp(fm.format(dateText).getTime());
-                        System.out.println(lastDate);
-                        System.out.println(elDate);
                         if (lastDate.getTime() < elDate.getTime()) {
                             posts.add(new Post(name, url, "", elDate));
+                        } else {
+                            break;
                         }
                     }
                 }
