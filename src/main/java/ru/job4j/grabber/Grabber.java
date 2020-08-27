@@ -9,13 +9,11 @@ import ru.job4j.parse.Parse;
 import ru.job4j.parse.SqlRuParse;
 import ru.job4j.store.PsqlStore;
 import ru.job4j.store.Store;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
 import java.util.Properties;
-
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;

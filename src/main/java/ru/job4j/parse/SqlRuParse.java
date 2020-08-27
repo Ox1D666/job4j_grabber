@@ -5,7 +5,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import ru.job4j.model.Post;
-
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.ParseException;
