@@ -47,7 +47,6 @@ public class SqlRuParse implements Parse {
                 }
             }
         }
-        posts.forEach(System.out::println);
         return posts;
     }
 
